@@ -275,71 +275,27 @@ $State: Exp $
     <property name="jrenativesubdir" value="bin"/>
   </target>
 
-  <target name="setupBuildType" depends="initBuildType, setupBuildFcs, setupBuildBeta, setupBuildStable, setupBuildDaily, checkBuildType">
+  <target name="setupBuildType" depends="initBuildType, setupBuildStable, checkBuildType">
     <echo message="BUILD_TYPE = ${BUILD_TYPE}"/>
   </target>
 
   <target name="initBuildType">
-    <!-- Default value is "daily", overridden on command line -->
-    <property name="BUILD_TYPE" value="daily"/>
+    <!-- Default value is "stable", overridden on command line -->
+    <property name="BUILD_TYPE" value="stable"/>
     <property name="buildType_${BUILD_TYPE}" value="true"/>
-  </target>
-
-  <!-- Set properties for FCS build -->
-  <target name="setupBuildFcs" if="buildType_fcs">
-    <property name="buildTypeSet" value="true"/>
-
-    <property name="version_build" value="b${version_buildnum}"/>
-    <property name="version_suffix" value=""/>
-
-    <property name="version" value="${version_base}"/>
-    <property name="version_file" value="${version_base_file}-lib"/>
-    <property name="doc_file" value="${version_base_file}-doc"/>
-    <property name="buildtime" value=""/>
-  </target>
-
-  <!-- Set properties for BETA build -->
-  <target name="setupBuildBeta" if="buildType_beta">
-    <property name="buildTypeSet" value="true"/>
-
-    <property name="version_build" value="b${version_buildnum}"/>
-    <property name="version_suffix" value="${version_betastr}"/>
-
-    <property name="version" value="${version_base}-${version_suffix}"/>
-    <property name="version_file" value="${version_base_file}-${version_suffix}-lib"/>
-    <property name="doc_file" value="${version_base_file}-${version_suffix}-doc"/>
-    <property name="buildtime" value=""/>
   </target>
 
   <!-- Set properties for STABLE build -->
   <target name="setupBuildStable" if="buildType_stable">
     <property name="buildTypeSet" value="true"/>
 
-    <property name="version_build" value="b${version_buildnum}"/>
+    <property name="version_build" value="b5"/>
     <property name="version_suffix" value="dr-${version_build}"/>
 
-    <property name="version" value="${version_base}-${version_suffix}"/>
-    <property name="version_file" value="${version_base_file}-${version_suffix}-lib"/>
-    <property name="doc_file" value="${version_base_file}-${version_suffix}-doc"/>
+    <property name="version" value="1.2-${version_suffix}"/>
+    <property name="version_file" value="1_2-${version_suffix}-lib"/>
+    <property name="doc_file" value="1_2-${version_suffix}-doc"/>
     <property name="buildtime" value=""/>
-  </target>
-
-  <!-- Set properties for DAILY build -->
-  <target name="setupBuildDaily" if="buildType_daily">
-    <property name="buildTypeSet" value="true"/>
-
-    <property name="version_build" value="b${version_buildnum}"/>
-    <property name="version_suffix" value="pre-dr-${version_build}"/>
-
-    <tstamp>
-      <!-- Set build time property -->
-      <format property="btime" pattern="dd_MMM_yyyy"/>
-    </tstamp>    
-
-    <property name="version" value="${version_base}-${version_suffix}"/>
-    <property name="version_file" value="${version_base_file}-${version_suffix}-lib"/>
-    <property name="doc_file" value="${version_base_file}-${version_suffix}-doc"/>
-    <property name="buildtime" value="-${btime}"/>
   </target>
 
   <!-- Check buildType -->
