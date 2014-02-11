@@ -1229,7 +1229,7 @@ public class TIFFImageReader extends ImageReader {
                        BaselineTIFFTagSet.COMPRESSION_CCITT_T_6) {
 
                 // Try to create the codecLib decompressor.
-                if(PackageUtil.isCodecLibAvailable()) {
+                /*if(PackageUtil.isCodecLibAvailable()) {
                     try {
                         this.decompressor =
                             new TIFFCodecLibFaxDecompressor(compression);
@@ -1242,7 +1242,7 @@ public class TIFFImageReader extends ImageReader {
                             System.out.println(re);
                         }
                     }
-                }
+                }*/
 
                 // Fall back to the Java decompressor.
                 if (this.decompressor == null) {
@@ -1254,7 +1254,7 @@ public class TIFFImageReader extends ImageReader {
             } else if (compression ==
                        BaselineTIFFTagSet.COMPRESSION_CCITT_T_4) {
 
-                if(PackageUtil.isCodecLibAvailable()) {
+                /*if(PackageUtil.isCodecLibAvailable()) {
                     // Try to create the codecLib decompressor.
                     try {
                         this.decompressor =
@@ -1268,7 +1268,7 @@ public class TIFFImageReader extends ImageReader {
                             System.out.println(re);
                         }
                     }
-                }
+                }*/
 
                 // Fall back to the Java decompressor.
                 if (this.decompressor == null) {

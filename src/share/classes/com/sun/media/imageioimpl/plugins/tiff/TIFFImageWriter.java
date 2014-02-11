@@ -841,7 +841,7 @@ public class TIFFImageWriter extends ImageWriter {
 
         if (compressor == null) {
             if (compression == BaselineTIFFTagSet.COMPRESSION_CCITT_RLE) {
-                if(PackageUtil.isCodecLibAvailable()) {
+                /*if(PackageUtil.isCodecLibAvailable()) {
                     try {
                         compressor = new TIFFCodecLibRLECompressor();
                         if(DEBUG) {
@@ -853,7 +853,7 @@ public class TIFFImageWriter extends ImageWriter {
                             System.out.println(e);
                         }
                     }
-                }
+                }*/
 
                 if(compressor == null) {
                     compressor = new TIFFRLECompressor();
@@ -868,7 +868,7 @@ public class TIFFImageWriter extends ImageWriter {
                 }
             } else if (compression ==
                        BaselineTIFFTagSet.COMPRESSION_CCITT_T_4) {
-                if(PackageUtil.isCodecLibAvailable()) {
+                /*if(PackageUtil.isCodecLibAvailable()) {
                     try {
                         compressor = new TIFFCodecLibT4Compressor();
                         if(DEBUG) {
@@ -880,7 +880,7 @@ public class TIFFImageWriter extends ImageWriter {
                             System.out.println(e);
                         }
                     }
-                }
+                }*/
 
                 if(compressor == null) {
                     compressor = new TIFFT4Compressor();
@@ -895,7 +895,7 @@ public class TIFFImageWriter extends ImageWriter {
                 }
             } else if (compression ==
                        BaselineTIFFTagSet.COMPRESSION_CCITT_T_6) {
-                if(PackageUtil.isCodecLibAvailable()) {
+                /*if(PackageUtil.isCodecLibAvailable()) {
                     try {
                         compressor = new TIFFCodecLibT6Compressor();
                         if(DEBUG) {
@@ -907,7 +907,7 @@ public class TIFFImageWriter extends ImageWriter {
                             System.out.println(e);
                         }
                     }
-                }
+                }*/
 
                 if(compressor == null) {
                     compressor = new TIFFT6Compressor();

@@ -46,7 +46,6 @@ package com.sun.media.imageioimpl.common;
 
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import com.sun.medialib.codec.jiio.Util;
 
 public class PackageUtil {
     /**
@@ -74,14 +73,14 @@ public class PackageUtil {
      */
     static {
         // Set codecLib flag.
-        try {
+        /*try {
             // Check for codecLib availability.
             isCodecLibAvailable = Util.isCodecLibAvailable();
         } catch(Throwable e) {
             // A Throwable is equivalent to unavailable. Throwable is used
             // in case an Error rather than an Exception is thrown.
             isCodecLibAvailable = false;
-        }
+        }*/
 
         // Set version and vendor strings.
         try {
@@ -101,7 +100,7 @@ public class PackageUtil {
     public static final boolean isCodecLibAvailable() {
         // Retrieve value of system property here to allow this to be
         // modified dynamically.
-        Boolean result = (Boolean)
+        /*Boolean result = (Boolean)
             AccessController.doPrivileged(new PrivilegedAction() {
                     public Object run() {
                         String property = null;
@@ -118,7 +117,8 @@ public class PackageUtil {
                 });
         boolean isCodecLibDisabled = result.booleanValue();
 
-        return isCodecLibAvailable && !isCodecLibDisabled;
+        return isCodecLibAvailable && !isCodecLibDisabled;*/
+        return false;
     }
 
     /**

@@ -223,7 +223,6 @@ $State: Exp $
     <property name="ostype" value="linux"/>
     <property name="platform" value="linux-amd64"/>
     <property name="arch" value="amd64"/>
-    <property name="clibarch" value="linux/amd64"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -231,7 +230,6 @@ $State: Exp $
     <property name="ostype" value="linux"/>
     <property name="platform" value="linux-i586"/>
     <property name="arch" value="i386"/>
-    <property name="clibarch" value="linux/i386"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -239,7 +237,6 @@ $State: Exp $
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-amd64"/>
     <property name="arch" value="amd64"/>
-    <property name="clibarch" value="solaris/amd64"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -247,7 +244,6 @@ $State: Exp $
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-sparc"/>
     <property name="arch" value="sparc"/>
-    <property name="clibarch" value="solaris/sparc"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -255,7 +251,6 @@ $State: Exp $
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-sparcv9"/>
     <property name="arch" value="sparcv9"/>
-    <property name="clibarch" value="solaris/sparcv9"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -263,7 +258,6 @@ $State: Exp $
     <property name="ostype" value="solaris"/>
     <property name="platform" value="solaris-i586"/>
     <property name="arch" value="i386"/>
-    <property name="clibarch" value="solaris/i386"/>
     <property name="jrenativesubdir" value="lib/${arch}"/>
   </target>
 
@@ -271,7 +265,6 @@ $State: Exp $
     <property name="ostype" value="windows"/>
     <property name="platform" value="windows-i586"/>
     <property name="arch" value="i386"/>
-    <property name="clibarch" value="windows/i386"/>
     <property name="jrenativesubdir" value="bin"/>
   </target>
 
@@ -319,22 +312,9 @@ $State: Exp $
 	  unless="platform"/>
   </target>
 
-  <!-- Sets "clib" property to "CLIB_DIR" property. -->
-  <target name="clib-env" if="CLIB_DIR">
-    <property name="clib" value="${CLIB_DIR}"/>
-  </target>
-
-  <!-- Sets "clib" property to default value. -->
-  <target name="clib-def" unless="CLIB_DIR">
-    <property name="clib" value="src/share/jclib4jai"/>
-  </target>
-
-  <!-- Sets "clib" property. -->
-  <target name="clib-property" depends="clib-env,clib-def"/>
-
-  <!-- Sets the platform-dependent properties, the "clib" property,
+  <!-- Sets the platform-dependent properties,
        and the time stamps. -->
-  <target name="init" depends="setupPlatform,clib-property">
+  <target name="init" depends="setupPlatform">
     <!-- Create the time stamp -->
     <tstamp>
       <!-- Set time stamp properties -->
@@ -345,7 +325,7 @@ $State: Exp $
     </tstamp>
   </target>
 
-  <target name="echo" depends="setupPlatform,clib-property"
+  <target name="echo" depends="setupPlatform"
 	  description="Prints the values of pertinent properties.">
     <echo message="os.arch         = ${os.arch}"/>
     <echo message="os.name         = ${os.name}"/>	
@@ -359,13 +339,11 @@ $State: Exp $
     <echo message="platform        = ${platform}"/>
     <echo message="ostype          = ${ostype}"/>
     <echo message="arch            = ${arch}"/>
-    <echo message="clibarch        = ${clibarch}"/>
     <echo message="jrenativesubdir = ${jrenativesubdir}"/>
 
     <echo message=""/>
 
     <echo message="src             = ${src}"/>
-    <echo message="clib            = ${clib}"/>
     <echo message="textdir         = ${textdir}"/>
     <echo message="packageListJ2SE = ${packageListJ2SE}"/>
     <echo message="docurlj2se      = ${docurlj2se}"/>
@@ -433,31 +411,6 @@ $State: Exp $
     </antcall>
   </target>
 
-  <!-- Copies codecLib debug mode files. -->
-  <target name="clib-debug">
-    <antcall target="debugcall">
-      <param name="targetname" value="clib"/>
-    </antcall>
-  </target>
-
-  <!-- Copies codecLib non-debug mode files. -->
-  <target name="clib-opt">
-    <antcall target="optcall">
-      <param name="targetname" value="clib"/>
-    </antcall>
-  </target>
-
-  <!-- Copies codecLib files. -->
-  <target name="clib">
-    <!-- Copy the codecLib jar file -->
-    <copy file="${clib}/clibwrapper_jiio.jar" todir="${jardir}"/>
-
-    <!-- Copy the codecLib native libraries -->
-    <copy todir="${libdir}">
-        <fileset dir="${clib}/${clibarch}" includes="**"/>
-    </copy>
-  </target>
-
   <target name="compilation" depends="init">
     <!-- Create the class file directory -->
     <mkdir dir="${classdir}"/>
@@ -466,14 +419,13 @@ $State: Exp $
     <copy todir="${builddir}">
       <fileset dir="${textdir}"
 	       includes="COPYRIGHT.txt,
-			 LICENSE.txt,
-			 LICENSE-codecLibJIIO.txt"/>
+			 LICENSE.txt"/>
     </copy>
 
     <!-- Compile the java code from ${src} into ${classdir} -->
     <javac sourcepath="" srcdir="${src}"
            destdir="${classdir}"
-           classpath="${clib}/clibwrapper_jiio.jar"
+           classpath=""
            debug="${debugsetting}"
            debuglevel="lines,source"
            deprecation="off"
@@ -488,14 +440,14 @@ $State: Exp $
     </copy>
   </target>
 
-  <target name="compile-debug" depends="init,clib-debug"
+  <target name="compile-debug" depends="init"
 	  description="Builds all classes with debug compilation.">
     <antcall target="debugcall">
       <param name="targetname" value="compilation"/>
     </antcall>
   </target>
 
-  <target name="compile-opt" depends="init,clib-opt"
+  <target name="compile-opt" depends="init"
 	  description="Builds all classes with non-debug compilation.">
     <antcall target="optcall">
       <param name="targetname" value="compilation"/>
@@ -644,7 +596,6 @@ $State: Exp $
 	 filesonly="true">
       <fileset file="${build}/${platform}/debug/COPYRIGHT.txt"/>
       <fileset file="${build}/${platform}/debug/LICENSE.txt"/>
-      <fileset file="${build}/${platform}/debug/LICENSE-codecLibJIIO.txt"/>
       <fileset dir="${build}/${platform}/debug"
 	       includes="lib/**,bin/**"/>
     </zip>
