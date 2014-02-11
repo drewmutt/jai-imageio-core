@@ -21,9 +21,9 @@ This will build the Java code for the `jj2000.*`, `com.sun.media.imageio.*`, `co
 
 The source for Image I/O Tools is covered by two seperate licenses:
 
-- Classes in the `com.sun.media` namespace are under the 3-clause BSD
+- Classes in the `com.sun.media` package are under the 3-clause BSD
 license given in `LICENSE-SUN.txt`.
 
-- Classes in the `jj2000.j2k` namepace are under a bespoke license 
+- Classes in the `jj2000.j2k` package are under a bespoke license 
   given in `LICENSE-JJ2K.txt. The license is not OSI approved, nor
   is it GPL compatible.
