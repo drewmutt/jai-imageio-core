@@ -24,5 +24,5 @@ The source for Image I/O Tools is covered by two seperate licenses:
 - Classes in the `com.sun.media` package are under the 3-clause BSD
 license given in `LICENSE-SUN.txt`.
 - Classes in the `jj2000.j2k` package are under a bespoke license 
-  given in `LICENSE-JJ2K.txt. The license is not OSI approved, nor
+  given in `LICENSE-JJ2K.txt`. The license is not OSI approved, nor
   is it GPL compatible.
