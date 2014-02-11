@@ -17,7 +17,7 @@ ant
 
 This will build the Java code for the `jj2000.*`, `com.sun.media.imageio.*`, `com.sun.media.imageioimpl.*`, `com.sun.media.jai.imageioimpl` and `com.sun.media.jai.operator` packages. 
 
-The output JAR file can be found at `build/opt/lib/extjai_imageio.jar`.
+The output JAR file can be found at `build/opt/lib/ext/jai_imageio.jar`.
 
 ## License
 
