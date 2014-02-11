@@ -1,4 +1,4 @@
-#  Java Advanced Imaging Image I/O Tools
+#  JAI Image I/O Tools
 
 The Java Advanced Imaging API provides a set of object-oriented interfaces that support a simple, high-level programming model which lets you manipulate images easily.
 
