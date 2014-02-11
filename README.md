@@ -15,7 +15,7 @@ This is a pure Java fork which removes the C library components, as a result the
 ant
 ```
 
-This will build the Java code for the jj2000.*, com.sun.media.imageio.*, com.sun.media.imageioimpl.*,  com.sun.media.jai.imageioimpl and com.sun.media.jai.operator packages. 
+This will build the Java code for the `jj2000.*`, `com.sun.media.imageio.*`, `com.sun.media.imageioimpl.*`, `com.sun.media.jai.imageioimpl` and `com.sun.media.jai.operator` packages. 
 
 ## License
 
