@@ -9,6 +9,11 @@ This is a pure Java fork which removes the C library components, as a result the
 - J2SE 1.4  or later.
 - Apache Ant 1.6  or later
 
+## Dependencies
+
+The build requires that Java Advanced Imaging (JAI) either be installed
+in the J2SDK used for the build or that jai_core.jar be on the CLASSPATH.
+
 ## Build
 
 ```
